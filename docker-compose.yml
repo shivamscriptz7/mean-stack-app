@@ -1,0 +1,17 @@
+version: "3.8"
+
+services:
+  mongo:
+    image: mongo
+    container_name: mongo_db
+    ports:
+      - "27017:27017"
+
+  mysql:
+    image: mysql:8
+    container_name: mysql_db
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: mean_auth
+    ports:
+      - "3306:3306"

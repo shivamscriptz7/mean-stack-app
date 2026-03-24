@@ -3,6 +3,14 @@
   <!-- Glow blob -->
   <div class="glow-blob"></div>
 
+  <!-- Toast notification -->
+  <div *ngIf="toast.show" class="toast"
+    [class.toast-success]="toast.type === 'success'"
+    [class.toast-error]="toast.type === 'error'">
+    <span>{{ toast.type === 'success' ? '✓' : '✕' }}</span>
+    <span>{{ toast.message }}</span>
+  </div>
+
   <div class="content-container">
 
     <!-- Page Header -->
@@ -18,7 +26,7 @@
 
         <!-- Name -->
         <div class="input-group flex-2">
-          <label class="input-label">Name</label>
+          <label class="input-label">Product Name</label>
           <input type="text" placeholder="Product name" [(ngModel)]="product.name" class="input-field">
         </div>
 

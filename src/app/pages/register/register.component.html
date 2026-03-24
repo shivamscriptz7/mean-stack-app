@@ -1,140 +1,137 @@
-<div style="
-  min-height: 100vh;
-  background-color: #0a0a0f;
-  display: flex; align-items: center; justify-content: center;
-  padding: 16px; font-family: 'Courier New', monospace;
-  position: relative; overflow: hidden;
-">
+<div class="page-wrapper">
 
-  <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-    width: 500px; height: 500px; border-radius: 50%;
-    background: radial-gradient(circle, #6366f1, #0a0a0f);
-    opacity: 0.1; filter: blur(120px); pointer-events: none;"></div>
+  <!-- Background glow effect -->
+  <div class="glow-blob"></div>
 
-  <!-- Toast -->
-  <div *ngIf="toast.show" style="
-    position: fixed; top: 24px; right: 24px; z-index: 9999;
-    padding: 14px 20px; border-radius: 10px; font-size: 12px;
-    letter-spacing: 0.05em; display: flex; align-items: center; gap: 10px;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.4);"
-  [style.background]="toast.type === 'success' ? 'rgba(16,185,129,0.15)' : 'rgba(239,68,68,0.15)'"
-  [style.border]="toast.type === 'success' ? '1px solid rgba(16,185,129,0.4)' : '1px solid rgba(239,68,68,0.4)'"
-  [style.color]="toast.type === 'success' ? '#6ee7b7' : '#fca5a5'">
+  <!-- Toast notification (success or error) -->
+  <div *ngIf="toast.show" class="toast"
+    [class.toast-success]="toast.type === 'success'"
+    [class.toast-error]="toast.type === 'error'">
     <span>{{ toast.type === 'success' ? '✓' : '✕' }}</span>
     <span>{{ toast.message }}</span>
   </div>
 
-  <div style="position: relative; z-index: 10; width: 100%; max-width: 380px;">
+  <!-- Main card wrapper -->
+  <div class="card-wrapper">
 
-    <p style="font-size: 10px; letter-spacing: 0.3em; color: #818cf8;
-      text-transform: uppercase; margin-bottom: 24px; text-align: center;">
-      — Create Account —
-    </p>
+    <p class="secure-label">— Create Account —</p>
 
-    <div style="border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.03);
-      backdrop-filter: blur(12px); border-radius: 16px; padding: 32px;
-      box-shadow: 0 25px 50px rgba(0,0,0,0.6);">
+    <div class="card">
 
-      <h2 style="color: #ffffff; font-size: 22px; font-weight: 700; margin: 0 0 4px 0;">Get started</h2>
-      <p style="color: rgba(255,255,255,0.3); font-size: 12px; margin: 0 0 28px 0;">
-        Create your account to continue
-      </p>
+      <h2 class="card-title">Get started</h2>
+      <p class="card-subtitle">Create your account to continue</p>
 
       <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
 
-        <!-- Username -->
-        <div style="margin-bottom: 18px;">
-          <label style="display: block; font-size: 10px; letter-spacing: 0.2em;
-            color: rgba(255,255,255,0.4); text-transform: uppercase; margin-bottom: 8px;">
-            Username
-          </label>
-          <div style="position: relative;">
-            <svg style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px;"
-              xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="rgba(255,255,255,0.25)">
+        <!-- Username field -->
+        <div class="form-group">
+          <label class="form-label">Username</label>
+          <div class="input-wrapper">
+
+            <!-- User icon -->
+            <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" fill="none"
+              viewBox="0 0 24 24" stroke="rgba(255,255,255,0.25)">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                 d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
             </svg>
-            <input type="text" formControlName="username" placeholder="your_username"
-              [style.borderColor]="username?.invalid && username?.touched ? '#ef4444' : 'rgba(255,255,255,0.1)'"
-              style="width: 100%; background: rgba(255,255,255,0.05); border: 1px solid;
-                color: #ffffff; font-size: 13px; font-family: 'Courier New', monospace;
-                border-radius: 8px; padding: 12px 16px 12px 38px; outline: none; box-sizing: border-box;"
-              onfocus="this.style.background='rgba(255,255,255,0.08)'"
-              onblur="this.style.background='rgba(255,255,255,0.05)'">
+
+            <input
+              type="text"
+              formControlName="username"
+              placeholder="your_username"
+              class="form-input"
+              [class.input-error]="username?.invalid && username?.touched"
+              (focus)="onFocus($event)"
+              (blur)="onBlur($event)">
           </div>
-          <div *ngIf="username?.invalid && username?.touched" style="margin-top: 6px;">
-            <p *ngIf="username?.errors?.['required']"
-              style="color: #f87171; font-size: 10px; margin: 0; letter-spacing: 0.05em;">
-              ✕ Username is required
-            </p>
-            <p *ngIf="username?.errors?.['minlength']"
-              style="color: #f87171; font-size: 10px; margin: 0; letter-spacing: 0.05em;">
-              ✕ Minimum 3 characters required
-            </p>
-            <p *ngIf="username?.errors?.['noSpaces']"
-              style="color: #f87171; font-size: 10px; margin: 0; letter-spacing: 0.05em;">
-              ✕ Username cannot contain spaces
-            </p>
+
+          <!-- Username validation errors -->
+          <div *ngIf="username?.invalid && username?.touched" class="error-messages">
+            <p *ngIf="username?.errors?.['required']"  class="error-text">Username is required</p>
+            <p *ngIf="username?.errors?.['minlength']" class="error-text">Minimum 3 characters required</p>
+            <p *ngIf="username?.errors?.['noSpaces']"  class="error-text">Username cannot contain spaces</p>
           </div>
         </div>
 
-        <!-- Password -->
-        <div style="margin-bottom: 24px;">
-          <label style="display: block; font-size: 10px; letter-spacing: 0.2em;
-            color: rgba(255,255,255,0.4); text-transform: uppercase; margin-bottom: 8px;">
-            Password
-          </label>
-          <div style="position: relative;">
-            <svg style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px;"
-              xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="rgba(255,255,255,0.25)">
+        <!-- Password field -->
+        <div class="form-group form-group-password">
+          <label class="form-label">Password</label>
+          <div class="input-wrapper">
+
+            <!-- Lock icon -->
+            <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" fill="none"
+              viewBox="0 0 24 24" stroke="rgba(255,255,255,0.25)">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                 d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
             </svg>
-            <input type="password" formControlName="password" placeholder="••••••••"
-              [style.borderColor]="password?.invalid && password?.touched ? '#ef4444' : 'rgba(255,255,255,0.1)'"
-              style="width: 100%; background: rgba(255,255,255,0.05); border: 1px solid;
-                color: #ffffff; font-size: 13px; font-family: 'Courier New', monospace;
-                border-radius: 8px; padding: 12px 16px 12px 38px; outline: none; box-sizing: border-box;"
-              onfocus="this.style.background='rgba(255,255,255,0.08)'"
-              onblur="this.style.background='rgba(255,255,255,0.05)'">
+
+            <!-- Password input: type switches based on showPassword toggle -->
+            <input
+              [type]="showPassword ? 'text' : 'password'"
+              formControlName="password"
+              placeholder="••••••••"
+              class="form-input form-input-password"
+              [class.input-error]="password?.invalid && password?.touched"
+              (focus)="onFocus($event)"
+              (blur)="onBlur($event)">
+
+            <!-- Eye icon toggle button -->
+            <button type="button" class="eye-btn" (click)="togglePassword()">
+
+              <!-- Eye open: shown when password is hidden -->
+              <svg *ngIf="!showPassword" xmlns="http://www.w3.org/2000/svg" fill="none"
+                viewBox="0 0 24 24" stroke="rgba(255,255,255,0.35)" width="16" height="16">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                  d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                  d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7
+                     -1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+              </svg>
+
+              <!-- Eye closed: shown when password is visible -->
+              <svg *ngIf="showPassword" xmlns="http://www.w3.org/2000/svg" fill="none"
+                viewBox="0 0 24 24" stroke="rgba(255,255,255,0.35)" width="16" height="16">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                  d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7
+                     a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243
+                     M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29
+                     m7.532 7.532l3.29 3.29M3 3l3.59 3.59
+                     m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7
+                     a10.025 10.025 0 01-4.132 5.411m0 0L21 21"/>
+              </svg>
+
+            </button>
           </div>
-          <div *ngIf="password?.invalid && password?.touched" style="margin-top: 6px;">
-            <p *ngIf="password?.errors?.['required']"
-              style="color: #f87171; font-size: 10px; margin: 0; letter-spacing: 0.05em;">
-              ✕ Password is required
-            </p>
-            <p *ngIf="password?.errors?.['minlength']"
-              style="color: #f87171; font-size: 10px; margin: 0; letter-spacing: 0.05em;">
-              ✕ Minimum 6 characters required
-            </p>
+
+          <!-- Password validation errors -->
+          <div *ngIf="password?.invalid && password?.touched" class="error-messages">
+            <p *ngIf="password?.errors?.['minLength']"   class="error-text">Minimum 8 characters required</p>
+            <p *ngIf="password?.errors?.['noUppercase']" class="error-text">At least 1 uppercase letter required</p>
+            <p *ngIf="password?.errors?.['noLowercase']" class="error-text">At least 1 lowercase letter required</p>
+            <p *ngIf="password?.errors?.['noNumber']"    class="error-text">At least 1 number required</p>
+            <p *ngIf="password?.errors?.['noSpecial']"   class="error-text">At least 1 special character required</p>
           </div>
-          <!-- Password strength hint -->
-          <p *ngIf="password?.valid"
-            style="color: #6ee7b7; font-size: 10px; margin: 6px 0 0 0; letter-spacing: 0.05em;">
-            ✓ Password looks good
-          </p>
+
+          <!-- Password valid indicator -->
+          <p *ngIf="password?.valid" class="success-hint">Password looks good</p>
         </div>
 
-        <button type="submit"
+        <!-- Submit button -->
+        <button
+          type="submit"
+          class="submit-btn"
           [disabled]="loading"
-          [style.opacity]="loading ? '0.7' : '1'"
-          style="width: 100%; padding: 13px; border-radius: 8px; border: none;
-            background-color: #4f46e5; color: #ffffff; font-size: 13px; font-weight: 700;
-            letter-spacing: 0.05em; cursor: pointer; box-shadow: 0 8px 24px rgba(79,70,229,0.35);
-            font-family: 'Courier New', monospace;"
-          onmouseover="if(!this.disabled) this.style.backgroundColor='#6366f1'"
-          onmouseout="if(!this.disabled) this.style.backgroundColor='#4f46e5'">
-          {{ loading ? 'Creating account...' : 'Create Account →' }}
+          [class.btn-loading]="loading">
+          {{ loading ? 'Creating account...' : 'Create Account' }}
         </button>
 
       </form>
     </div>
 
-    <p style="text-align: center; color: rgba(255,255,255,0.2); font-size: 11px; margin-top: 20px;">
+    <!-- Link to login page -->
+    <p class="login-link">
       Already have an account?
-      <a routerLink="/login" style="color: #818cf8; text-decoration: none;"
-        onmouseover="this.style.textDecoration='underline'"
-        onmouseout="this.style.textDecoration='none'">Sign in</a>
+      <a routerLink="/login" class="login-anchor">Sign in</a>
     </p>
 
   </div>

@@ -18,10 +18,10 @@ export class ProductsComponent implements OnInit {
     this.loadProducts();
   }
 
-  loadProducts() {
-    this.productService.getProducts()
-      .subscribe((res: any) => this.products = res);
-  }
+ loadProducts() {
+  this.productService.getProducts()
+    .subscribe((res: any) => this.products = res.reverse());
+}
 
   addProduct() {
     this.productService.createProduct(this.product)

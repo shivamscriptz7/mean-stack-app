@@ -1,0 +1,277 @@
+/* ================================
+   Dashboard Wrapper
+   ================================ */
+.dashboard-wrapper {
+  min-height: 100vh;
+  background-color: #0a0a0f;
+  padding: 48px 24px;
+  font-family: 'Courier New', monospace;
+}
+
+.dashboard-container {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+/* ================================
+   Header Row
+   ================================ */
+.dashboard-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 32px;
+}
+
+.dashboard-label {
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  color: #818cf8;
+  text-transform: uppercase;
+  margin: 0 0 8px 0;
+}
+
+.dashboard-title {
+  color: #ffffff;
+  font-size: 26px;
+  font-weight: 700;
+  margin: 0;
+}
+
+/* ================================
+   Logout Button
+   ================================ */
+.logout-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border-radius: 8px;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  background: rgba(239, 68, 68, 0.08);
+  color: #fca5a5;
+  font-size: 12px;
+  font-family: 'Courier New', monospace;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.logout-btn:hover {
+  background: rgba(239, 68, 68, 0.18);
+  border-color: rgba(239, 68, 68, 0.6);
+}
+
+.logout-icon {
+  width: 15px;
+  height: 15px;
+}
+
+/* ================================
+   Card
+   ================================ */
+.card {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 16px;
+  padding: 28px;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+}
+
+.card-label {
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: rgba(255, 255, 255, 0.4);
+  text-transform: uppercase;
+  margin: 0 0 20px 0;
+}
+
+/* ================================
+   Loading / Error States
+   ================================ */
+.state-loading {
+  color: rgba(255, 255, 255, 0.3);
+  font-size: 13px;
+  margin: 0;
+}
+
+.state-error {
+  color: #f87171;
+  font-size: 13px;
+  margin: 0;
+}
+
+/* ================================
+   Weather Content
+   ================================ */
+.weather-content {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+
+.weather-temp-block {
+  flex-shrink: 0;
+}
+
+.weather-temp {
+  color: #ffffff;
+  font-size: 48px;
+  font-weight: 700;
+  margin: 0;
+  line-height: 1;
+}
+
+.weather-desc {
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 13px;
+  margin: 8px 0 0 0;
+  text-transform: capitalize;
+}
+
+.weather-details-block {
+  border-left: 1px solid rgba(255, 255, 255, 0.08);
+  padding-left: 32px;
+}
+
+.weather-city {
+  color: #818cf8;
+  font-size: 22px;
+  font-weight: 600;
+  margin: 0 0 4px 0;
+}
+
+.weather-detail {
+  color: rgba(255, 255, 255, 0.35);
+  font-size: 12px;
+  margin: 4px 0;
+}
+
+/* ================================
+   Card Top Row
+   ================================ */
+.card-top-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.card-top-row .card-label {
+  margin: 0;
+}
+
+/* ================================
+   Weather Controls
+   ================================ */
+.weather-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.controls-divider {
+  color: rgba(255, 255, 255, 0.2);
+  font-size: 11px;
+  letter-spacing: 0.05em;
+}
+
+/* ================================
+   City Dropdown
+   ================================ */
+.select-wrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.city-select {
+  appearance: none;
+  -webkit-appearance: none;
+  background: rgba(129, 140, 248, 0.08);
+  border: 1px solid rgba(129, 140, 248, 0.25);
+  border-radius: 8px;
+  color: #818cf8;
+  font-family: 'Courier New', monospace;
+  font-size: 12px;
+  letter-spacing: 0.05em;
+  padding: 8px 32px 8px 12px;
+  cursor: pointer;
+  outline: none;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.city-select:hover {
+  background: rgba(129, 140, 248, 0.15);
+  border-color: rgba(129, 140, 248, 0.5);
+}
+
+.city-select:focus {
+  border-color: #818cf8;
+  background: rgba(129, 140, 248, 0.15);
+}
+
+.city-select option {
+  background: #0a0a0f;
+  color: #ffffff;
+}
+
+.select-arrow {
+  position: absolute;
+  right: 10px;
+  color: #818cf8;
+  font-size: 11px;
+  pointer-events: none;
+}
+
+/* ================================
+   City Input
+   ================================ */
+.input-wrapper {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid rgba(129, 140, 248, 0.25);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: border-color 0.2s ease;
+}
+
+.input-wrapper:focus-within {
+  border-color: #818cf8;
+}
+
+.city-input {
+  background: rgba(129, 140, 248, 0.08);
+  border: none;
+  outline: none;
+  color: #ffffff;
+  font-family: 'Courier New', monospace;
+  font-size: 12px;
+  letter-spacing: 0.05em;
+  padding: 8px 12px;
+  width: 130px;
+}
+
+.city-input::placeholder {
+  color: rgba(255, 255, 255, 0.2);
+}
+
+.search-btn {
+  background: rgba(129, 140, 248, 0.15);
+  border: none;
+  border-left: 1px solid rgba(129, 140, 248, 0.25);
+  color: #818cf8;
+  font-size: 14px;
+  padding: 8px 10px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  line-height: 1;
+}
+
+.search-btn:hover {
+  background: rgba(129, 140, 248, 0.3);
+}

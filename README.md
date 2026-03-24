@@ -1,4 +1,5 @@
-# Project Setup Guide
+# MEAN Stack App
+
 **MongoDB • MySQL • Node.js • Angular 14**
 
 ---
@@ -7,51 +8,39 @@
 
 ```
 MEAN-STACK-APP/
+├── .angular/
+├── .vscode/
 ├── backend/
-│   ├── config/
-│   ├── controllers/
-│   │   ├── auth.controller.js
-│   │   ├── order.controller.js
-│   │   └── product.controller.js
-│   ├── models/
-│   ├── routes/
-│   ├── node_modules/
-│   ├── package.json
-│   ├── package-lock.json
-│   └── server.js
-│
-├── frontend/
-│   ├── .angular/
-│   ├── .vscode/
-│   ├── dist/
-│   ├── node_modules/
-│   ├── src/
-│   │   ├── app/
-│   │   │   ├── core/
-│   │   │   ├── pages/
-│   │   │   │   ├── dashboard/
-│   │   │   │   ├── login/
-│   │   │   │   ├── products/
-│   │   │   │   └── register/
-│   │   │   ├── services/
-│   │   │   ├── app-routing.module.ts
-│   │   │   ├── app.component.css
-│   │   │   ├── app.component.html
-│   │   │   ├── app.component.spec.ts
-│   │   │   ├── app.component.ts
-│   │   │   ├── app.module.ts
-│   │   │   └── auth.guard.ts
-│   │   ├── assets/
-│   │   ├── environments/
-│   │   ├── favicon.ico
-│   │   ├── index.html
-│   │   ├── main.ts
-│   │   ├── polyfills.ts
-│   │   ├── styles.css
-│   │   └── test.ts
-│
+├── node_modules/
+├── src/
+│   └── app/
+│       ├── core/
+│       ├── pages/
+│       │   ├── dashboard/
+│       │   ├── login/
+│       │   ├── products/
+│       │   └── register/
+│       ├── services/
+│       ├── app-routing.module.ts
+│       ├── app.component.css
+│       ├── app.component.html
+│       ├── app.component.spec.ts
+│       ├── app.component.ts
+│       ├── app.module.ts
+│       └── auth.guard.ts
+├── .browserslistrc
+├── .editorconfig
+├── .gitignore
+├── angular.json
 ├── docker-compose.yml
-└── README.md
+├── karma.conf.js
+├── package.json
+├── README.md
+├── server.js
+├── tailwind.config.js
+├── tsconfig.app.json
+├── tsconfig.json
+└── tsconfig.spec.json
 ```
 
 ---
@@ -117,7 +106,7 @@ docker ps                # Verify running containers
 
 ### MongoDB — Products & Orders
 
-Config file: `config/mongo.js`
+Config file: `backend/config/mongo.js`
 
 ```javascript
 mongoose.connect("mongodb://localhost:27017/meanApp");
@@ -125,7 +114,7 @@ mongoose.connect("mongodb://localhost:27017/meanApp");
 
 ### MySQL — User Auth
 
-Config file: `config/mysql.js`
+Config file: `backend/config/mysql.js`
 
 ```javascript
 const db = mysql.createConnection({
@@ -155,8 +144,7 @@ CREATE TABLE users (
 ### Install Dependencies
 
 ```bash
-cd backend  && npm install
-cd frontend && npm install
+npm install
 ```
 
 ### Install Angular CLI (if needed)
@@ -184,7 +172,6 @@ MySQL connected
 ### Start Frontend
 
 ```bash
-cd frontend
 ng serve   # or: npm start
 ```
 
@@ -195,6 +182,18 @@ Expected output:
 ✔ Compiled successfully.
 ✔ Angular Live Development Server is listening on localhost:4200
 ```
+
+---
+
+## Tech Stack
+
+| Layer | Technology |
+|-------|-----------|
+| Frontend | Angular 14 + TailwindCSS |
+| Backend | Node.js + Express |
+| Auth DB | MySQL 8 (Docker) |
+| App DB | MongoDB (Docker) |
+| Styling | Tailwind CSS |
 
 ---
 

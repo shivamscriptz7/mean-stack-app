@@ -43,7 +43,7 @@ export class ProductsComponent implements OnInit {
   saveEdit() {
     this.productService.updateProduct(this.editingProduct._id, this.editingProduct)
       .subscribe(() => {
-        this.loadProducts(); // ✅ fixed: was getProducts()
+        this.loadProducts(); //  fixed: was getProducts()
         this.editingProduct = null;
       });
   }

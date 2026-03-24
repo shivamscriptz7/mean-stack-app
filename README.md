@@ -172,7 +172,7 @@ MySQL connected
 ### Start Frontend
 
 ```bash
-ng serve   # or: npm start
+ng serve 
 ```
 
 App: `http://localhost:4200`

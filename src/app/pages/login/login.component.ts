@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 export class LoginComponent {
   toast = { show: false, message: '', type: '' }; // type: 'success' | 'error'
   loading = false;
+  
 
   constructor(
     private fb: FormBuilder,

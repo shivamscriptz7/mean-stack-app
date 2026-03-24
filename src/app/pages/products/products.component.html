@@ -1,0 +1,122 @@
+<div class="page-wrapper">
+
+  <!-- Glow blob -->
+  <div class="glow-blob"></div>
+
+  <div class="content-container">
+
+    <!-- Page Header -->
+    <p class="section-label">— Inventory —</p>
+    <h2 class="page-title">Products</h2>
+
+    <!-- Add Product Card -->
+    <div class="card">
+      <p class="card-label">Add New Product</p>
+
+      <!-- Input Row -->
+      <div class="input-row">
+
+        <!-- Name -->
+        <div class="input-group flex-2">
+          <label class="input-label">Name</label>
+          <input type="text" placeholder="Product name" [(ngModel)]="product.name" class="input-field">
+        </div>
+
+        <!-- Price -->
+        <div class="input-group flex-1">
+          <label class="input-label">Price</label>
+          <input type="number" placeholder="0.00" [(ngModel)]="product.price" class="input-field">
+        </div>
+
+      </div>
+
+      <!-- Description -->
+      <div class="input-group mb-20">
+        <label class="input-label">Description</label>
+        <input type="text" placeholder="Short description..." [(ngModel)]="product.description" class="input-field">
+      </div>
+
+      <!-- Add Button -->
+      <button (click)="addProduct()"
+        [disabled]="!product.name?.trim() || !product.price || !product.description?.trim()" class="btn-primary"
+        [class.btn-disabled]="!product.name?.trim() || !product.price || !product.description?.trim()">
+        + Add Product
+      </button>
+
+    </div>
+
+    <!-- Products List -->
+    <div>
+      <p class="card-label">All Products</p>
+
+      <!-- Empty state -->
+      <div *ngIf="products.length === 0" class="empty-state">
+        No products yet — add one above
+      </div>
+
+      <!-- Product Items -->
+      <div *ngFor="let p of products" class="product-item">
+
+        <!-- Product Info -->
+        <div class="product-info">
+          <!-- Icon dot -->
+          <div class="product-icon">⬡</div>
+
+          <div>
+            <p class="product-name">{{ p.name }}</p>
+            <p class="product-desc">{{ p.description }}</p>
+          </div>
+        </div>
+
+        <!-- Price + Actions -->
+        <div class="product-actions">
+          <span class="product-price">₹{{ p.price }}</span>
+
+          <!-- Edit Button -->
+          <button (click)="startEdit(p)" class="btn-edit">
+            Edit
+          </button>
+
+          <!-- Delete Button -->
+          <button (click)="deleteProduct(p._id)" class="btn-delete">
+            Delete
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Edit Modal -->
+  <div *ngIf="editingProduct" class="modal-overlay">
+    <div class="modal-box">
+      <p class="card-label">Edit Product</p>
+
+      <!-- Name -->
+      <div class="input-group mb-16">
+        <label class="input-label">Name</label>
+        <input type="text" [(ngModel)]="editingProduct.name" class="input-field">
+      </div>
+
+      <!-- Price -->
+      <div class="input-group mb-16">
+        <label class="input-label">Price</label>
+        <input type="number" [(ngModel)]="editingProduct.price" class="input-field">
+      </div>
+
+      <!-- Description -->
+      <div class="input-group mb-24">
+        <label class="input-label">Description</label>
+        <input type="text" [(ngModel)]="editingProduct.description" class="input-field">
+      </div>
+
+      <!-- Buttons -->
+      <div class="modal-actions">
+        <button (click)="saveEdit()" class="btn-primary btn-flex">Save Changes</button>
+        <button (click)="cancelEdit()" class="btn-cancel">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+</div>
